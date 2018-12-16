@@ -55,10 +55,7 @@ export default {
           payload.imageSrc,
           payload.promo
         )
-        console.log(getters.user.id)
-        console.log(newAd)
         const ad = await fb.database().ref('ads').push(newAd)
-        
         commit('setLoading', false)
         commit('createAd', {
           ...newAd,

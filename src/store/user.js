@@ -2,6 +2,9 @@ import * as fb from 'firebase'
 
 class User {
   constructor (id) {
+    if (!id) {
+      throw new Error('id in User class must be defined')
+    }
     this.id = id
   }
 }
@@ -22,6 +25,9 @@ export default {
 
       try {
         const user = await fb.auth().createUserWithEmailAndPassword(email, password)
+        // const user = await fb.auth().createUserWithEmailAndPassword('ddd329@yandex.ru', '123456')
+        // console.log('user: ');
+        // console.log(user);
         commit('setUser', new User(user.uid))
         commit('setLoading', false)
       } catch (error) {
@@ -36,7 +42,9 @@ export default {
 
       try {
         const user = await fb.auth().signInWithEmailAndPassword(email, password)
-        commit('setUser', new User(user.uid))
+        // const user = await fb.auth().signInWithEmailAndPassword('ddd329@yandex.ru', '123456')
+        // console.log(user.user.Qb.uid)
+        commit('setUser', new User(user.user.Qb.uid))
         commit('setLoading', false)
       } catch (error) {
         commit('setLoading', false)
