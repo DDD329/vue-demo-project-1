@@ -25,9 +25,6 @@ export default {
 
       try {
         const user = await fb.auth().createUserWithEmailAndPassword(email, password)
-        // const user = await fb.auth().createUserWithEmailAndPassword('ddd329@yandex.ru', '123456')
-        // console.log('user: ');
-        // console.log(user);
         commit('setUser', new User(user.uid))
         commit('setLoading', false)
       } catch (error) {
@@ -39,6 +36,14 @@ export default {
     async loginUser ({commit}, {email, password}) {
       commit('clearError')
       commit('setLoading', true)
+
+      if (!email) {
+        throw new Error('loginUser: email must be not empty')
+      }
+
+      if (!password) {
+        throw new Error('loginUser: password must be not empty')
+      }
 
       try {
         const user = await fb.auth().signInWithEmailAndPassword(email, password)
