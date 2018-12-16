@@ -118,9 +118,6 @@ export default {
       this.$store.dispatch('logoutUser')
       this.$router.push('/')
     }
-  },
-  created () {
-    this.$store.dispatch('loginUser', {})
   }
 }
 </script>
